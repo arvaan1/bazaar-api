@@ -150,7 +150,7 @@ async function refreshAll() {
 // HTTP server
 const server = http.createServer((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  if (req.url === '/api/feeds' || req.url === '/health') {
+  if (req.url.startsWith('/api/feeds') || req.url.startsWith('/health')) {
     const body = req.url === '/health' ? JSON.stringify({ok:true}) : JSON.stringify(cache);
     res.writeHead(200, {'Content-Type':'application/json','Cache-Control':'public, max-age=60'});
     res.end(body);
